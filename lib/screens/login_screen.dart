@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tlaxporte_app2/widgets/input_decoration.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Stack(
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
           Positioned(child: burbuja(), top: -40, left: -30),
           Positioned(child: burbuja(), top: -50, right: -20),
           Positioned(child: burbuja(), bottom: -50, left: 10),
-          Positioned(child: burbuja(), bottom: 120, right: -20),
+          Positioned(child: burbuja(), bottom: 120, right: 20),
           Positioned(child: burbuja(), bottom: -30, right: 10)
         ],
       ),
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: Color.fromRGBO(255, 255, 255, 0.05)),
+          color: const Color.fromRGBO(255, 255, 255, 0.05)),
     );
   }
 
@@ -66,42 +67,63 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Column loginForm(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 300),
-        Container(
-            padding: const EdgeInsets.all(20),
-            margin: const EdgeInsets.symmetric(horizontal: 30),
-            width: double.infinity,
-            height: 350,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 15,
-                    offset: Offset(0, 5),
+  SingleChildScrollView loginForm(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 300),
+          Container(
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              width: double.infinity,
+              height: 350,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 15,
+                      offset: Offset(0, 5),
+                    )
+                  ]),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Text('Inicio', style: Theme.of(context).textTheme.headline4),
+                  const SizedBox(height: 30),
+                  Container(
+                    child: Form(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                              autocorrect: false,
+                              decoration: InputDecorations.inputDecoration(
+                                  hintext: 'ejemplo.@gmail.com',
+                                  labeltext: 'Correo electronico',
+                                  icon: const Icon(
+                                      Icons.alternate_email_rounded))),
+                          const SizedBox(height: 30),
+                          TextFormField(
+                              autocorrect: false,
+                              decoration: InputDecorations.inputDecoration(
+                                  hintext: '******',
+                                  labeltext: 'Contraseña',
+                                  icon: const Icon(Icons.lock))),
+                          const SizedBox(height: 30)
+                        ],
+                      ),
+                    ),
                   )
-                ]),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Text('Inicio', style: Theme.of(context).textTheme.headline4),
-                SizedBox(
-                  height: 30,
-                )
-              ],
-            )),
-        const SizedBox(height: 50),
-        const Text(
-          'Crear nueva cuenta',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        )
-      ],
+                ],
+              )),
+          const SizedBox(height: 50),
+          const Text(
+            'Crear nueva cuenta',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }
